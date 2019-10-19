@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import User from '../models/User';
-
+import Meetup from '../models/Meetup';
 import AuthConfig from '../../configs/auth';
 
 class SessionController {
@@ -33,6 +33,18 @@ class SessionController {
     // Verify if password does not match
     if (!(await user.checkPassword(password))) {
       return res.status(401).json({ error: 'Password does not match' });
+    }
+
+    // Verify if is a meetup organizer
+    const organizerUser = await Meetup.findOne({
+      where: {
+        user_id: user.id,
+      },
+    });
+    if (!organizerUser) {
+      return res
+        .status(401)
+        .json({ error: 'This app is for Meetup Organizers only' });
     }
 
     const { id, name } = user;
