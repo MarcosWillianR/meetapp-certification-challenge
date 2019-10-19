@@ -21,7 +21,7 @@ module.exports = {
       },
       date: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       banner_id: {
         type: Sequelize.INTEGER,
@@ -44,11 +44,11 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
-  down: (queryInterface) => {
+  down: queryInterface => {
     return queryInterface.dropTable('meetups');
-  }
+  },
 };
