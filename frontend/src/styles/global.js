@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const MainColor = '#F94D6A';
 export const FontSize20 = '20px';
+export const FontSize14 = '14px';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');

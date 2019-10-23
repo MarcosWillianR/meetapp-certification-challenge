@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { MainColor, FontSize20 } from '~/styles/global';
+import { MainColor, FontSize20, FontSize14 } from '~/styles/global';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -36,6 +36,14 @@ export const Content = styled.div`
       &::placeholder {
         color: rgba(255, 255, 255, 0.4);
       }
+    }
+
+    span {
+      margin: -5px 0 10px;
+      align-self: baseline;
+      color: ${MainColor};
+      font-size: ${FontSize14};
+      font-weight: bold;
     }
 
     button {
