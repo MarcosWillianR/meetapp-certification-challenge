@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const MainColor = '#F94D6A';
+export const FontSize20 = '20px';
+
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
@@ -30,17 +33,15 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  input, button {
+    border: 0;
+  }
+
   ul {
     list-style: none;
   }
 
   a {
     text-decoration: none;
-  }
-
-  img {
-    max-width: 100%;
-    display: block;
-    margin: 0;
   }
 `;
