@@ -26,6 +26,7 @@ class SessionController {
 
     // Verify if user does not exists
     const user = await User.findOne({ where: { email } });
+
     if (!user) {
       return res.status(401).json({ error: 'User does not exists' });
     }
@@ -41,11 +42,10 @@ class SessionController {
         user_id: user.id,
       },
     });
-    if (!organizerUser) {
-      return res
-        .status(401)
-        .json({ error: 'This app is for Meetup Organizers only' });
-    }
+
+    let organizer = true;
+
+    if (!organizerUser) organizer = false;
 
     const { id, name } = user;
 
@@ -55,6 +55,7 @@ class SessionController {
         id,
         name,
         email,
+        organizer,
       },
       token: jwt.sign({ id }, AuthConfig.secret, {
         expiresIn: AuthConfig.expiresIn,
