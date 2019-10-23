@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export const MainColor = '#F94D6A';
 export const FontSize20 = '20px';
 export const FontSize14 = '14px';
