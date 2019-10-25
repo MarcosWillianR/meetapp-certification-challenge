@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { FaMugHot } from 'react-icons/fa';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
@@ -35,7 +36,9 @@ export default function SignIn() {
           placeholder="Sua senha secreta"
         />
 
-        <button type="submit">{loading ? 'Carregando...' : 'Entrar'}</button>
+        <button type="submit">
+          {loading ? <FaMugHot size={22} /> : 'Entrar'}
+        </button>
         <Link to="/register">Criar conta grátis</Link>
       </Form>
     </>

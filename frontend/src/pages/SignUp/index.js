@@ -2,8 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaMugHot } from 'react-icons/fa';
 
 import logo from '~/assets/logo.svg';
+
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('Informe seu nome completo'),
@@ -16,7 +20,12 @@ const schema = Yup.object().shape({
 });
 
 export default function SignUp() {
-  const handleSubmit = data => {};
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+
+  const handleSubmit = ({ name, email, password }) => {
+    dispatch(signUpRequest(name, email, password));
+  };
 
   return (
     <>
@@ -31,7 +40,9 @@ export default function SignUp() {
           placeholder="Sua senha secreta"
         />
 
-        <button type="submit">Criar conta</button>
+        <button type="submit">
+          {loading ? <FaMugHot size={22} /> : 'Criar conta'}
+        </button>
         <Link to="/">Já tenho login</Link>
       </Form>
     </>
