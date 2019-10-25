@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { FaMugHot } from 'react-icons/fa';
 
 import logo from '~/assets/logo.svg';
 
@@ -40,7 +41,7 @@ export default function SignUp() {
         />
 
         <button type="submit">
-          {loading ? 'carregando...' : 'Criar conta'}
+          {loading ? <FaMugHot size={22} /> : 'Criar conta'}
         </button>
         <Link to="/">Já tenho login</Link>
       </Form>

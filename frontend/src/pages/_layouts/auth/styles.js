@@ -1,6 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { darken } from 'polished';
 import { MainColor, FontSize20, FontSize14 } from '~/styles/global';
+
+const loading = keyframes`
+  from {
+    opacity: .6;
+    transform: translate3d(0,-3px,0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0,3px,0);
+  }
+`;
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -44,6 +55,11 @@ export const Content = styled.div`
       color: ${MainColor};
       font-size: ${FontSize14};
       font-weight: bold;
+    }
+
+    svg {
+      color: #fff;
+      animation: ${loading} 1s alternate-reverse infinite;
     }
 
     button {
