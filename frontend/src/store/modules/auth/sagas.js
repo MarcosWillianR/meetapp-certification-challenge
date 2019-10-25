@@ -16,12 +16,7 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!user.organizer) {
-      toast.error('Usuário não possui um meetapp cadastrado');
-      yield put(signFailure());
-
-      return;
-    }
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
 
@@ -42,7 +37,6 @@ export function* signUp({ payload }) {
       name,
       email,
       password,
-      organizer: true,
     });
     yield put(signUpSuccess());
 
