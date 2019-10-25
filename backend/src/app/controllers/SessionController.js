@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 import User from '../models/User';
-import Meetup from '../models/Meetup';
 import AuthConfig from '../../configs/auth';
 
 class SessionController {
@@ -36,17 +35,6 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    // Verify if is a meetup organizer
-    const organizerUser = await Meetup.findOne({
-      where: {
-        user_id: user.id,
-      },
-    });
-
-    let organizer = true;
-
-    if (!organizerUser) organizer = false;
-
     const { id, name } = user;
 
     // return json with user data and token
@@ -55,7 +43,6 @@ class SessionController {
         id,
         name,
         email,
-        organizer,
       },
       token: jwt.sign({ id }, AuthConfig.secret, {
         expiresIn: AuthConfig.expiresIn,
