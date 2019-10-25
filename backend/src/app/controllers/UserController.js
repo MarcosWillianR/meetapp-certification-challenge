@@ -23,6 +23,7 @@ class UserController {
      */
 
     const { email } = req.body;
+
     const userExists = await User.findOne({ where: { email } });
 
     // Verify if user exists

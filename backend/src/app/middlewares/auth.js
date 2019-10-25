@@ -3,7 +3,7 @@ import { promisify } from 'util';
 import authConfig from '../../configs/auth';
 
 export default async (req, res, next) => {
-  const authToken = req.headers.authentication;
+  const authToken = req.headers.authorization;
 
   // Verifiy if authToken is not undefined
   if (!authToken) {
