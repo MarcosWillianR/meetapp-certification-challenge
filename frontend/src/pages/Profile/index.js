@@ -1,7 +1,11 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 export default function Profile() {
-  return <div />;
+  return (
+    <Container>
+      <h1>Profile</h1>
+    </Container>
+  );
 }
