@@ -21,14 +21,16 @@ export const Container = styled.div`
     margin-top: 40px;
 
     input,
-    button {
+    button,
+    textarea {
       height: 50px;
       border-radius: 4px;
       font-size: ${FontSize20};
       color: #fff;
     }
 
-    input {
+    input,
+    textarea {
       padding: 8px 16px;
       background-color: rgba(0, 0, 0, 0.2);
       margin-bottom: 15px;
@@ -37,9 +39,11 @@ export const Container = styled.div`
       }
     }
 
-    hr {
-      margin: 10px 0 20px 0;
-      border-color: rgba(255, 255, 255, 0.3);
+    textarea {
+      padding-top: 16px;
+      resize: none;
+      border: 0;
+      height: calc(50px * 3.5);
     }
 
     span {
