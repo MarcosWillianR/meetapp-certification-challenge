@@ -23,7 +23,7 @@ export function* signIn({ payload }) {
     history.push('/dashboard');
   } catch (error) {
     toast.error(
-      'Parece que você digitou algum dado errado, verifique e tente novamente'
+      'Parece que a conta não existe, verifique seus dados e tente novamente'
     );
     yield put(signFailure());
   }
@@ -58,7 +58,12 @@ export function setToken({ payload }) {
   }
 }
 
+export function signOut() {
+  history.push('/');
+}
+
 export default all([
+  takeLatest('@auth/SIGN_OUT', signOut),
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
