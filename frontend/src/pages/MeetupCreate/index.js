@@ -1,19 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { MdControlPoint } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import BannerInput from './BannerInput';
 import DateInput from './DateInput';
 
 import { Container } from './styles';
 
-// import a from '~/store/modules/meetup/actions';
+import { createMeetupRequest } from '~/store/modules/meetup/actions';
 
 export default function MeetupEdit() {
   const dispatch = useDispatch();
 
-  function handleSubmit(data) {}
+  function handleSubmit(data) {
+    dispatch(createMeetupRequest(data));
+  }
 
   return (
     <Container>

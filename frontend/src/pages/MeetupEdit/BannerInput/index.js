@@ -1,26 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useField } from '@rocketseat/unform';
+import React, { useState } from 'react';
+import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 
 import { Container } from './styles';
 
+import defaultBanner from '~/assets/defaultBanner.jpg';
+
 export default function BannerInput({ image }) {
-  const { defaultValue, registerField } = useField('banner_id');
-
-  const [file, setFile] = useState(defaultValue && defaultValue.id);
-  const [preview, setPreview] = useState(defaultValue && defaultValue.url);
-
-  const ref = useRef();
-
-  useEffect(() => {
-    if (ref.current) {
-      registerField({
-        name: 'banner_id',
-        ref: ref.current,
-        path: 'dataset-file',
-      });
-    }
-  }, [ref]); //eslint-disable-line
+  const [file, setFile] = useState('');
+  const [preview, setPreview] = useState(defaultBanner);
 
   async function handleChange(e) {
     const data = new FormData();
@@ -29,10 +17,10 @@ export default function BannerInput({ image }) {
 
     const response = await api.post('files', data);
 
-    const { id, url } = response.data;
+    const { id, path } = response.data;
 
     setFile(id);
-    setPreview(url);
+    setPreview(`http://localhost:3333/files/${path}`);
   }
 
   return (
@@ -46,8 +34,9 @@ export default function BannerInput({ image }) {
           accept="image/*"
           data-file={file}
           onChange={handleChange}
-          ref={ref}
         />
+
+        <Input type="hidden" name="banner_id" value={file} />
       </label>
     </Container>
   );

@@ -8,6 +8,7 @@ import {
   meetupUpdateSuccess,
   meetupFailure,
   getMeetupsSuccess,
+  meetupCreateSuccess,
 } from './actions';
 
 export function* updateMeetup({ payload }) {
@@ -46,8 +47,23 @@ export function* cancelMeetup({ payload }) {
   }
 }
 
+export function* createMeetup({ payload }) {
+  try {
+    const response = yield call(api.post, 'meetup', payload.data);
+
+    toast.success('Meetup criado com sucesso!');
+
+    return yield put(meetupCreateSuccess(response.data));
+  } catch (error) {
+    toast.error('Não foi possível salvar o meetup, tente de novo em breve');
+
+    return yield put(meetupFailure());
+  }
+}
+
 export default all([
   takeLatest('@meetup/CANCEL_REQUEST', cancelMeetup),
   takeLatest('@meetup/GET_REQUEST', getMeetup),
   takeLatest('@Meetup/UPDATE_REQUEST', updateMeetup),
+  takeLatest('@meetup/CREATE_REQUEST', createMeetup),
 ]);
