@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { MdControlPoint } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { parseISO } from 'date-fns';
 import BannerInput from './BannerInput';
 import DateInput from './DateInput';
 
@@ -42,7 +42,7 @@ export default function MeetupEdit({ match }) {
             name="description"
             placeholder={selectedMeetup[0].description || 'Descrição completa'}
           />
-          <DateInput date={selectedMeetup[0].date} />
+          <DateInput dateS={parseISO(selectedMeetup[0].date)} name="date" />
           <Input
             name="localization"
             placeholder={selectedMeetup[0].localization || 'Localização'}
