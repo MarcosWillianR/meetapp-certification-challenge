@@ -5,7 +5,6 @@ import {
   startOfDay,
   endOfDay,
 } from 'date-fns';
-import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
 import Meetup from '../models/Meetup';
@@ -44,18 +43,6 @@ class MeetupController {
   }
 
   async store(req, res) {
-    const schema = Yup.object().shape({
-      title: Yup.string().required(),
-      description: Yup.string().required(),
-      localization: Yup.string().required(),
-      date: Yup.date().required(),
-      banner_id: Yup.number().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
     const hourStart = startOfHour(parseISO(req.body.date));
 
     // Verify if is a past date
@@ -87,18 +74,6 @@ class MeetupController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      title: Yup.string(),
-      description: Yup.string(),
-      localization: Yup.string(),
-      date: Yup.date(),
-      banner_id: Yup.number(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
     const meetup = await Meetup.findByPk(req.params.id);
 
     // Verify if is a meetup owner
