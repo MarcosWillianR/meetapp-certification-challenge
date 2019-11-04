@@ -1,26 +1,9 @@
 import jwt from 'jsonwebtoken';
-import * as Yup from 'yup';
 import User from '../models/User';
 import AuthConfig from '../../configs/auth';
 
 class SessionController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
-      password: Yup.string().required(),
-    });
-
-    // Verify data entry first
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
-    /**
-     * If data entry is ok, continue to next steps of verification
-     */
-
     const { email, password } = req.body;
 
     // Verify if user does not exists
